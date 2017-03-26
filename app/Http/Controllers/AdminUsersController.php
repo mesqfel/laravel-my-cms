@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\User;
+
 class AdminUsersController extends Controller
 {
     /**
@@ -15,7 +17,10 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index');
+
+        $users = User::latest()->get();
+        
+        return view('admin.users.index', compact('users'));
     }
 
     /**
