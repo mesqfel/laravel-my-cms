@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\CreateUserRequest;
 
 use App\User;
+use App\Role;
 
 class AdminUsersController extends Controller
 {
@@ -30,18 +32,25 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+
+        $roles = Role::lists('name', 'id');
+
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\CreateUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        // dd($request->all());
+
+        User::create($request->all());
+
+        return redirect('/admin/users');
     }
 
     /**

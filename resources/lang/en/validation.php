@@ -95,6 +95,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'role_id' => [
+            'required' => 'The role field is required.',
+        ],
     ],
 
     /*
