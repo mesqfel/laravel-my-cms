@@ -8,9 +8,11 @@
 	    <thead>
 	      <tr>
 	        <th>Id</th>
+	        <th>Photo</th>
 	        <th>Name</th>
 	        <th>Role</th>
 	        <th>Email</th>
+	        
 	        <th>Status</th>
 	        <th>Created at</th>
 	        <th>Updated at</th>
@@ -22,6 +24,13 @@
 
 			<tr>
 				<td>{{$user->id}}</td>
+				<td>
+				    @if($user->photo)						    
+					    <div class="image-container">
+					    	<img height="50" src="{{ $user->photo->path }}">
+					    </div>
+				    @endif
+				</td>
 				<td>{{$user->name}}</td>
 				<td>{{$user->role->name}}</td>
 				<td>{{$user->email}}</td>

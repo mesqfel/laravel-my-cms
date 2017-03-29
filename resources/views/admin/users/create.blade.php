@@ -47,8 +47,8 @@
 
 	<div class="form-group">
 		
-		{!! Form::label('fileInput', 'Profile Photo:') !!}
-		{!! Form::file('fileInput') !!}
+		{!! Form::label('photo_id', 'Profile Photo:') !!}
+		{!! Form::file('photo_id') !!}
 
 	</div>
 
