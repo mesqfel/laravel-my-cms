@@ -56,7 +56,7 @@
 
 		<div class="form-group">
 
-			{!! Form::submit('Save', ['class' => 'btn btn-primary', 'style' => 'margin-top: 10px;']); !!}
+			{!! Form::submit('Save', ['class' => 'btn btn-primary pull-left', 'style' => 'margin-right: 5px;']); !!}
 
 		</div>
 

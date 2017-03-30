@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\EditUserRequest;
+use Illuminate\Support\Facades\Auth;
 
 use App\User;
 use App\Role;
@@ -23,8 +24,9 @@ class AdminUsersController extends Controller
     {
 
         $users = User::latest()->get();
+        $loggedUser = Auth::user();
         
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('loggedUser', 'users'));
     }
 
     /**
@@ -36,8 +38,9 @@ class AdminUsersController extends Controller
     {
 
         $roles = Role::lists('name', 'id');
+        $loggedUser = Auth::user();
 
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.create', compact('loggedUser','roles'));
     }
 
     /**
@@ -86,13 +89,14 @@ class AdminUsersController extends Controller
     {
 
         $user = User::find($id);
+        $loggedUser = Auth::user();
 
         if(!$user)
             return redirect('/admin');
 
         $roles = Role::lists('name', 'id');
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('loggedUser', 'user', 'roles'));
     }
 
     /**
