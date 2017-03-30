@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\EditUserRequest;
 
 use App\User;
 use App\Role;
@@ -83,7 +84,15 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.users.edit');
+
+        $user = User::find($id);
+
+        if(!$user)
+            return redirect('/admin');
+
+        $roles = Role::lists('name', 'id');
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -93,9 +102,22 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $inputs = $request->all();
+
+        if($file = $request->file('photo_id')){
+            $name = time().'_'.$file->getClientOriginalName();
+            $file->move('images/users', $name);
+            $photo = Photo::create(['path' => $name]);
+            $inputs['photo_id'] = $photo->id;
+        }
+
+        $user->update($inputs);
+
+        return redirect('/admin/users');
     }
 
     /**
@@ -106,6 +128,8 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id)->delete();
+
+        return redirect('/admin/users');
     }
 }

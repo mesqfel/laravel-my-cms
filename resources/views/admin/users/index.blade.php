@@ -4,7 +4,7 @@
 
 	<h1>Users</h1>
 
-	<table class="table table-striped">
+	<table class="table table-striped table-responsive">
 	    <thead>
 	      <tr>
 	        <th>Id</th>
@@ -12,10 +12,8 @@
 	        <th>Name</th>
 	        <th>Role</th>
 	        <th>Email</th>
-	        
 	        <th>Status</th>
-	        <th>Created at</th>
-	        <th>Updated at</th>
+	        <th>Edit</th>
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -35,8 +33,14 @@
 				<td>{{$user->role->name}}</td>
 				<td>{{$user->email}}</td>
 				<td>{{$user->is_active ? 'Active' : 'Not Active'}}</td>
-				<td>{{$user->created_at->diffForHumans()}}</td>
-				<td>{{$user->updated_at->diffForHumans()}}</td>
+				<td>
+					<a href="{{route('admin.users.edit', $user->id)}}">
+						<i class="fa fa-edit"></i>
+					</a>
+				</td>
+
+
+{{-- 				{{route('posts.show', $post->id)}} --}}
 			</tr>
 
 	    @endforeach
