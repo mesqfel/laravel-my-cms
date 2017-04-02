@@ -4,6 +4,16 @@
 
 	<h1>Users</h1>
 
+	@if(Session::has('crudUserMsg'))
+
+		<div class="alert alert-success">
+
+			{{ session('crudUserMsg') }}
+
+		</div>
+
+	@endif
+
 	<table class="table table-striped table-responsive">
 	    <thead>
 	      <tr>
@@ -39,8 +49,6 @@
 					</a>
 				</td>
 
-
-{{-- 				{{route('posts.show', $post->id)}} --}}
 			</tr>
 
 	    @endforeach
