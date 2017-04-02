@@ -91,7 +91,7 @@ class AdminUsersController extends Controller
         $user = User::find($id);
 
         if(!$user)
-            return redirect('/admin');
+            return redirect(404);
 
         $roles = Role::lists('name', 'id');
 
@@ -138,7 +138,7 @@ class AdminUsersController extends Controller
 
         $imgPath = '';
         if($user->photo){
-            $imgPath = public_path().$user->photo->path;
+            $imgPath = public_path().'/images/users/'.$user->photo->path;
         }
 
         $user->delete();

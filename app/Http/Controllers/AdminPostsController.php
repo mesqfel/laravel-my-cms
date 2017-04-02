@@ -10,6 +10,7 @@ use App\Http\Requests\PostRequest;
 use App\Post;
 use App\User;
 use App\Photo;
+use App\Category;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -36,7 +37,10 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+
+        $categories = Category::lists('name', 'id');
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -87,9 +91,11 @@ class AdminPostsController extends Controller
         $post = Post::find($id);
 
         if(!$post)
-            return redirect('/admin');
+            return redirect(404);
 
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::lists('name', 'id');
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -101,7 +107,23 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $inputs = $request->all();
+
+        if($file = $request->file('photo_id')){
+            $name = time().'_'.$file->getClientOriginalName();
+            $file->move('images/posts', $name);
+            $photo = Photo::create(['path' => $name]);
+            $inputs['photo_id'] = $photo->id;
+        }
+
+        $user = Auth::user();
+
+        $user->posts()->whereId($id)->first()->update($inputs);
+
+        Session::flash('crudPostMsg', 'The post has been edited successfully');
+
+        return redirect('/admin/posts');
     }
 
     /**
@@ -112,6 +134,20 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $imgPath = '';
+        if($post->photo){
+            $imgPath = public_path().'/images/posts/'.$post->photo->path;
+        }
+
+        $post->delete();
+        
+        if($imgPath)
+            unlink($imgPath);
+
+        Session::flash('crudPostMsg', 'The post has been deleted successfully');
+
+        return redirect('/admin/posts');
     }
 }

@@ -26,7 +26,7 @@
 		<div class="form-group">
 
 			{!! Form::label('category_id', 'Category:') !!}
-			{!! Form::select('category_id', ['1' => 'Sports', '2' => 'Science', '3' => 'Programming'], null, ['class' => 'form-control','placeholder' => 'Pick a category...']); !!}
+			{!! Form::select('category_id', $categories, null, ['class' => 'form-control','placeholder' => 'Pick a category...']); !!}
 
 		</div>
 

@@ -22,7 +22,6 @@
 	        <th>Image</th>
 	        <th>Author</th>
 	        <th>Category</th>
-	        
 	        <th>Title</th>
 	        <th>Body</th>
 	        <th>Edit</th>
@@ -42,9 +41,9 @@
 				    @endif
 				</td>
 				<td>{{$post->user->name}}</td>
-				<td>{{$post->category_id}}</td>
+				<td>{{$post->category->name}}</td>
 				<td>{{$post->title}}</td>
-				<td>{{$post->body}}</td>
+				<td>{{str_limit($post->body, 100)}}</td> 
 				<td>
 					<a href="{{route('admin.posts.edit', $post->id)}}">
 						<i class="fa fa-edit"></i>
