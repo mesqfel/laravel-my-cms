@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
+
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests;
+
+use App\Category;
 
 class AdminCategoriesController extends Controller
 {
@@ -15,7 +20,9 @@ class AdminCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::latest()->get();
+        
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -25,7 +32,7 @@ class AdminCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -34,9 +41,13 @@ class AdminCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        Category::create($request->all());
+
+        Session::flash('crudCategoryMsg', 'The category has been created successfully');
+
+        return redirect('/admin/categories');
     }
 
     /**
@@ -58,7 +69,12 @@ class AdminCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+
+        if(!$category)
+            return redirect(404);
+
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -68,9 +84,15 @@ class AdminCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->update($request->all());
+
+        Session::flash('crudCategoryMsg', 'The category has been edited successfully');
+
+        return redirect('/admin/categories');
     }
 
     /**
@@ -81,6 +103,12 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->delete();
+
+        Session::flash('crudCategoryMsg', 'The category has been deleted successfully');
+
+        return redirect('/admin/categories');
     }
 }
