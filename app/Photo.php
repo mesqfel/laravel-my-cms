@@ -10,20 +10,4 @@ class Photo extends Model
         'path'
     ];
 
-    private $_imgPath = '/images/users/';
-
-
-    public function getPathAttribute($value){
-
-    	if($value){
-    		return $this->_imgPath.$value;	
-    	}
-    	else
-    		return '';
-
-    }
-
-
-
-
 }

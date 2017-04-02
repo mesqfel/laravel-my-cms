@@ -35,7 +35,7 @@
 				<td>
 				    @if($user->photo)						    
 					    <div class="image-container">
-					    	<img height="50" src="{{ $user->photo->path }}">
+					    	<img height="50" src="/images/users/{{ $user->photo->path }}">
 					    </div>
 				    @endif
 				</td>

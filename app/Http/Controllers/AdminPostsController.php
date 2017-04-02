@@ -5,6 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\PostRequest;
+
+use App\Post;
+use App\User;
+use App\Photo;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminPostsController extends Controller
 {
@@ -15,7 +23,10 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        //
+
+        $posts = Post::latest()->get();
+        
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -25,7 +36,7 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -34,9 +45,24 @@ class AdminPostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        $inputs = $request->all();
+
+        if($file = $request->file('photo_id')){
+            $name = time().'_'.$file->getClientOriginalName();
+            $file->move('images/posts', $name);
+            $photo = Photo::create(['path' => $name]);
+            $inputs['photo_id'] = $photo->id;
+        }
+
+        $user = Auth::user();
+
+        $user->posts()->create($inputs);
+
+        Session::flash('crudPostMsg', 'The post has been created successfully');
+
+        return redirect('/admin/posts');
     }
 
     /**
@@ -58,7 +84,12 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+
+        if(!$post)
+            return redirect('/admin');
+
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**

@@ -98,6 +98,12 @@ return [
         'role_id' => [
             'required' => 'The role field is required.',
         ],
+        'body' => [
+            'required' => 'The content field is required.',
+        ],
+        'category_id' => [
+            'required' => 'The category field is required.',
+        ],
     ],
 
     /*

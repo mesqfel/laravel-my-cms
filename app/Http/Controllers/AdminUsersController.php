@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\EditUserRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use App\User;
@@ -25,9 +24,8 @@ class AdminUsersController extends Controller
     {
 
         $users = User::latest()->get();
-        $loggedUser = Auth::user();
         
-        return view('admin.users.index', compact('loggedUser', 'users'));
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -39,9 +37,8 @@ class AdminUsersController extends Controller
     {
 
         $roles = Role::lists('name', 'id');
-        $loggedUser = Auth::user();
 
-        return view('admin.users.create', compact('loggedUser','roles'));
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -92,14 +89,13 @@ class AdminUsersController extends Controller
     {
 
         $user = User::find($id);
-        $loggedUser = Auth::user();
 
         if(!$user)
             return redirect('/admin');
 
         $roles = Role::lists('name', 'id');
 
-        return view('admin.users.edit', compact('loggedUser', 'user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -140,12 +136,15 @@ class AdminUsersController extends Controller
 
         $user = User::findOrFail($id);
 
-        if($user->photo->path){
+        $imgPath = '';
+        if($user->photo){
             $imgPath = public_path().$user->photo->path;
         }
 
         $user->delete();
-        unlink($imgPath);
+        
+        if($imgPath)
+            unlink($imgPath);
 
         Session::flash('crudUserMsg', 'The user has been deleted successfully');
 
