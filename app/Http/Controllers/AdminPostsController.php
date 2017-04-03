@@ -55,7 +55,7 @@ class AdminPostsController extends Controller
 
         if($file = $request->file('photo_id')){
             $name = time().'_'.$file->getClientOriginalName();
-            $file->move('images/posts', $name);
+            $file->move('images', $name);
             $photo = Photo::create(['path' => $name]);
             $inputs['photo_id'] = $photo->id;
         }
@@ -112,7 +112,7 @@ class AdminPostsController extends Controller
 
         if($file = $request->file('photo_id')){
             $name = time().'_'.$file->getClientOriginalName();
-            $file->move('images/posts', $name);
+            $file->move('images', $name);
             $photo = Photo::create(['path' => $name]);
             $inputs['photo_id'] = $photo->id;
         }
@@ -137,14 +137,16 @@ class AdminPostsController extends Controller
         $post = Post::findOrFail($id);
 
         $imgPath = '';
-        if($post->photo){
-            $imgPath = public_path().'/images/posts/'.$post->photo->path;
+        if($photo = $post->photo){
+            $imgPath = public_path().$post->photo->path;
         }
 
         $post->delete();
         
-        if($imgPath)
+        if($imgPath){
             unlink($imgPath);
+            $photo->delete();
+        }
 
         Session::flash('crudPostMsg', 'The post has been deleted successfully');
 

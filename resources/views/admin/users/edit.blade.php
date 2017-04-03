@@ -45,7 +45,7 @@
 
 			    @if($user->photo)						    
 				    <div class="image-container">
-				    	<img height="50" src="/images/users/{{ $user->photo->path }}" style="margin-bottom: 7px;">
+				    	<img height="50" src="{{ $user->photo->path }}" style="margin-bottom: 7px;">
 				    </div>
 			    @endif
 
