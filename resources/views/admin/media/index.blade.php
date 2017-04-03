@@ -20,7 +20,7 @@
 	        <th>Id</th>
 	        <th>Image</th>
 	        <th>Name</th>
-	        <th>Delete</th>
+	        <th></th>
 	      </tr>
 	    </thead>
 	    <tbody>
