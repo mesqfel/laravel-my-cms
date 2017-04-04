@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 use App\CommentReply;
 
@@ -95,6 +96,25 @@ class CommentRepliesController extends Controller
         //
     }
 
+    public function moderate(Request $request, $id)
+    {
+
+        $reply = CommentReply::findOrFail($id);
+
+        $data = [
+            'is_active' => !$request->is_active
+        ];
+
+        $reply->update($data);
+
+        if(!$request->is_active)
+            Session::flash('crudCommentReplyMsg', 'The reply has been approved successfully');
+        else
+            Session::flash('crudCommentReplyMsg', 'The reply has been rejected successfully');
+        
+        return redirect()->back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -103,6 +123,12 @@ class CommentRepliesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reply = CommentReply::findOrFail($id);
+
+        $reply->delete();
+
+        Session::flash('crudCommentReplyMsg', 'The reply has been deleted successfully');
+
+        return redirect()->back();
     }
 }

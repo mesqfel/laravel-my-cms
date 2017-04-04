@@ -137,4 +137,18 @@ class PostCommentsController extends Controller
 
         return redirect()->back();
     }
+
+    public function showReplies($id)
+    {
+
+        $comment = Comment::find($id);
+
+        if(!$comment)
+            return redirect(404);
+
+        $comment->replies = $comment->replies()->latest()->get();
+        
+        return view('admin.comments.replies', compact('comment'));
+    }
+
 }

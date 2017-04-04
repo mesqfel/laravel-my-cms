@@ -42,6 +42,10 @@ Route::group(['middleware' => 'admin'], function(){
 
 	Route::patch('/admin/comments/moderate/{id}', ['as'=>'admin.comments.moderate', 'uses' => 'PostCommentsController@moderate']);
 
+	Route::get('/admin/comments/{id}/replies', ['as'=>'admin.comments.replies', 'uses' => 'PostCommentsController@showReplies']);
+
+	Route::patch('/admin/comment-reply/moderate/{id}', ['as'=>'admin.comment_reply.moderate', 'uses' => 'CommentRepliesController@moderate']);
+
 	Route::resource('/admin/comment/replies', 'CommentRepliesController');
 
 });

@@ -2,19 +2,19 @@
 
  @section('content')
 
-	<h1>Comments</h1>
+	<h1>Replies for Comment id {{$comment->id}} </h1>
 
-	@if(Session::has('crudCommentMsg'))
+	@if(Session::has('crudCommentReplyMsg'))
 
 		<div class="alert alert-success">
 
-			{{ session('crudCommentMsg') }}
+			{{ session('crudCommentReplyMsg') }}
 
 		</div>
 
 	@endif
 
-	@if(count($comments))
+	@if(count($comment->replies))
 
 		<table class="table table-striped table-responsive">
 		    <thead>
@@ -24,54 +24,47 @@
 		        <th>Author</th>
 		        <th>Author Photo</th>
 		        <th>Author Email</th>
-		        <th>Comment</th>
-		        <th>Replies</th>
+		        <th>Reply</th>
 		        <th>Moderate</th>
 		        <th></th>
 		      </tr>
 		    </thead>
 		    <tbody>
 
-		    @foreach($comments as $comment)
+		    @foreach($comment->replies as $reply)
 
 				<tr>
-					<td>{{$comment->id}}</td>
+					<td>{{$reply->id}}</td>
 					<td>
 						<a target="_blank" href="{{route('home.post', $comment->post->id)}}">
 							{{$comment->post->title}}	
 						</a>
 					</td>
-					<td>{{$comment->author}}</td>
+					<td>{{$reply->author}}</td>
 
 					<td>
 						<div class="image-container">
-						    @if($comment->photo)
-						    	<img height="50" src="{{ $comment->photo }}">
+						    @if($reply->photo)
+						    	<img height="50" src="{{ $reply->photo }}">
 					    	@else
 						    	<img height="50" src="/images/profile-placeholder.jpg">
 						    @endif
 					    </div>
 					</td>
 
-					<td>{{$comment->email}}</td>
-					<td>{{$comment->body}}</td>
-
-					<td>
-						<a href="{{route('admin.comments.replies', $comment->id)}}">
-							<i class="fa fa-comments-o"></i>
-						</a>
-					</td>
+					<td>{{$reply->email}}</td>
+					<td>{{$reply->body}}</td>
 
 					{{-- Moderate --}}
 					<td>
 
-						{!! Form::open(['method' => 'PATCH', 'action' => ['PostCommentsController@moderate', $comment->id]]) !!}
+						{!! Form::open(['method' => 'PATCH', 'action' => ['CommentRepliesController@moderate', $reply->id]]) !!}
 
-							{!! Form::hidden('is_active', $comment->is_active) !!}
+							{!! Form::hidden('is_active', $reply->is_active) !!}
 
 							<div class="form-group">
 
-								@if(!$comment->is_active)
+								@if(!$reply->is_active)
 								
 									{!! Form::submit('Approve', ['class' => 'btn btn-success']); !!}
 
@@ -90,7 +83,7 @@
 					{{-- Delete --}}
 					<td>
 
-						{!! Form::open(['method' => 'DELETE', 'action' => ['PostCommentsController@destroy', $comment->id]  ]) !!}
+						{!! Form::open(['method' => 'DELETE', 'action' => ['CommentRepliesController@destroy', $reply->id]  ]) !!}
 
 							<div class="form-group">
 
@@ -113,7 +106,7 @@
 	@else
 
 		<div class="alert alert-danger">
-			No comments to show
+			No replies to show
 		</div>
 
 	@endif
