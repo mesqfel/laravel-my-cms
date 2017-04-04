@@ -33,11 +33,13 @@
 			<tr>
 				<td>{{$user->id}}</td>
 				<td>
-				    @if($user->photo)						    
-					    <div class="image-container">
+					<div class="image-container">
+					    @if($user->photo)
 					    	<img height="50" src="{{ $user->photo->path }}">
-					    </div>
-				    @endif
+						@else
+							<img height="50" src="/images/profile-placeholder.jpg">
+					    @endif
+				    </div>
 				</td>
 				<td>{{$user->name}}</td>
 				<td>{{$user->role->name}}</td>

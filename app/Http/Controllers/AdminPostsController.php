@@ -152,4 +152,32 @@ class AdminPostsController extends Controller
 
         return redirect('/admin/posts');
     }
+
+    public function post($id)
+    {
+
+        $post = Post::find($id);
+
+        if(!$post)
+            return redirect(404);
+
+        $post->comments = $post->comments()->latest()->get();
+        
+        return view('post', compact('post'));
+    }
+
+    public function showComments($id)
+    {
+
+        $post = Post::find($id);
+
+        if(!$post)
+            return redirect(404);
+
+        $post->comments = $post->comments()->latest()->get();
+        
+        return view('admin.posts.comments', compact('post'));
+    }
+
+
 }

@@ -14,48 +14,56 @@
 
 	@endif
 
-	<table class="table table-striped table-responsive">
-	    <thead>
-	      <tr>
-	        <th>Id</th>
-	        <th>Image</th>
-	        <th>Name</th>
-	        <th></th>
-	      </tr>
-	    </thead>
-	    <tbody>
+	@if(count($photos))
 
-	    @foreach($photos as $photo)
+		<table class="table table-striped table-responsive">
+		    <thead>
+		      <tr>
+		        <th>Id</th>
+		        <th>Image</th>
+		        <th>Name</th>
+		        <th></th>
+		      </tr>
+		    </thead>
+		    <tbody>
 
-			<tr>
-				<td>{{$photo->id}}</td>
-				<td>
-				    <div class="image-container">
-				    	<img height="50" src="{{$photo->path}}">
-				    </div>
-				</td>
-				<td>{{str_replace('/images/',  '',$photo->path)}}</td>
-				<td>
+		    @foreach($photos as $photo)
 
-					{!! Form::open(['method' => 'DELETE', 'action' => ['AdminMediaController@destroy', $photo->id]  ]) !!}
+				<tr>
+					<td>{{$photo->id}}</td>
+					<td>
+					    <div class="image-container">
+					    	<img height="50" src="{{$photo->path}}">
+					    </div>
+					</td>
+					<td>{{str_replace('/images/',  '',$photo->path)}}</td>
+					<td>
 
-						<div class="form-group">
+						{!! Form::open(['method' => 'DELETE', 'action' => ['AdminMediaController@destroy', $photo->id]  ]) !!}
 
-							{!! Form::submit('Delete', ['class' => 'btn btn-danger']); !!}
+							<div class="form-group">
 
-						</div>
+								{!! Form::submit('Delete', ['class' => 'btn btn-danger']); !!}
 
-					{!! Form::close() !!}
+							</div>
 
+						{!! Form::close() !!}
 
-				</td>
+					</td>
 
-			</tr>
+				</tr>
 
-	    @endforeach
+		    @endforeach
 
-	    </tbody>
-	  </table>
+		    </tbody>
+		  </table>
 
+	@else
+
+		<div class="alert alert-danger">
+			No images to show
+		</div>
+
+	@endif
 
  @endsection
