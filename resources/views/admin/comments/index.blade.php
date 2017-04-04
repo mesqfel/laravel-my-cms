@@ -37,7 +37,7 @@
 				<tr>
 					<td>{{$comment->id}}</td>
 					<td>
-						<a target="_blank" href="{{route('home.post', $comment->post->id)}}">
+						<a target="_blank" href="{{route('home.post', $comment->post->slug)}}">
 							{{$comment->post->title}}	
 						</a>
 					</td>
@@ -107,7 +107,11 @@
 		    @endforeach
 
 		    </tbody>
-		  </table>
+		</table>
+
+		<div style="text-align: center;">
+			{{$comments->render()}}
+		</div>
 
 
 	@else

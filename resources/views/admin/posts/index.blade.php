@@ -54,7 +54,7 @@
 					</td>
 
 					<td>
-						<a target = "_blank" href="{{route('home.post', $post->id)}}">
+						<a target = "_blank" href="{{route('home.post', $post->slug)}}">
 							<i class="fa fa-eye"></i>
 						</a>
 					</td>
@@ -71,6 +71,10 @@
 
 		    </tbody>
 		  </table>
+
+		<div style="text-align: center;">
+			{{$posts->render()}}
+		</div>
 
 	@else
 

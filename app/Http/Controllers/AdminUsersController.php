@@ -23,7 +23,7 @@ class AdminUsersController extends Controller
     public function index()
     {
 
-        $users = User::latest()->get();
+        $users = User::latest()->paginate(10);
         
         return view('admin.users.index', compact('users'));
     }

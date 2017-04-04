@@ -55,7 +55,11 @@
 
 	    @endforeach
 
-	    </tbody>
-	  </table>
+		</tbody>
+	</table>
+
+	<div style="text-align: center;">
+		{{$users->render()}}
+	</div>
 
 @endsection

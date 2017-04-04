@@ -25,7 +25,7 @@ class AdminPostsController extends Controller
     public function index()
     {
 
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->paginate(10);
         
         return view('admin.posts.index', compact('posts'));
     }
@@ -108,6 +108,8 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
 
+        $post = Post::findOrFail($id);
+
         $inputs = $request->all();
 
         if($file = $request->file('photo_id')){
@@ -117,9 +119,8 @@ class AdminPostsController extends Controller
             $inputs['photo_id'] = $photo->id;
         }
 
-        $user = Auth::user();
-
-        $user->posts()->whereId($id)->first()->update($inputs);
+        $post->slug = null;
+        $post->update($inputs);
 
         Session::flash('crudPostMsg', 'The post has been edited successfully');
 
@@ -153,10 +154,9 @@ class AdminPostsController extends Controller
         return redirect('/admin/posts');
     }
 
-    public function post($id)
+    public function post($slug)
     {
-
-        $post = Post::find($id);
+        $post = Post::where('slug', $slug)->get()->first();
 
         if(!$post)
             return redirect(404);

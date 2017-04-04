@@ -22,7 +22,7 @@ class PostCommentsController extends Controller
      */
     public function index()
     {
-        $comments = Comment::latest()->get();
+        $comments = Comment::latest()->paginate(10);
         
         return view('admin.comments.index', compact('comments'));
     }
@@ -146,8 +146,8 @@ class PostCommentsController extends Controller
         if(!$comment)
             return redirect(404);
 
-        $comment->replies = $comment->replies()->latest()->get();
-        
+        $comment->replies = $comment->replies()->latest()->paginate(10);
+
         return view('admin.comments.replies', compact('comment'));
     }
 

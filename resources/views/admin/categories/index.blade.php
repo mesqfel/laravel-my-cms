@@ -41,7 +41,11 @@
 		    @endforeach
 
 		    </tbody>
-		  </table>
+		</table>
+
+		<div style="text-align: center;">
+			{{$categories->render()}}
+		</div>
 
 	@else
 
