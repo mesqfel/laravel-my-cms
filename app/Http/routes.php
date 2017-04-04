@@ -24,11 +24,8 @@ Route::get('/post/{id}', ['as'=>'home.post', 'uses' => 'AdminPostsController@pos
 
 Route::group(['middleware' => 'admin'], function(){
 
-
 	Route::get('/admin', function () {
-	    
 	    return view('admin.index');
-
 	});
 
 	Route::resource('/admin/users', 'AdminUsersController');
@@ -46,5 +43,13 @@ Route::group(['middleware' => 'admin'], function(){
 	Route::patch('/admin/comments/moderate/{id}', ['as'=>'admin.comments.moderate', 'uses' => 'PostCommentsController@moderate']);
 
 	Route::resource('/admin/comment/replies', 'CommentRepliesController');
+
+});
+
+Route::group(['middleware' => 'auth'], function(){
+
+	Route::post('/admin/comments', ['as'=>'admin.comments.store', 'uses' => 'PostCommentsController@store']);
+
+	Route::post('/admin/comment/replies', ['as'=>'admin.comment.replies.store', 'uses' => 'CommentRepliesController@store']);
 
 });

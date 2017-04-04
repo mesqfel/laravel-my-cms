@@ -20,7 +20,7 @@ class Admin
         $user = Auth::user();
 
         if(!$user || !$user->isAdmin() || !$user->is_active){
-            return redirect(404);
+            return response()->view('errors.401', [], 401);
         }
 
         return $next($request);

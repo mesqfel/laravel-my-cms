@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\CommentReply;
+
 class CommentRepliesController extends Controller
 {
     /**
@@ -36,7 +40,25 @@ class CommentRepliesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $user = Auth::user();
+
+        $userPhotoPath = '';
+        if($user->photo){
+            $userPhotoPath = $user->photo->path;
+        }
+
+        $data = [
+            'comment_id' => $request->comment_id,
+            'author' => $user->name,
+            'email' => $user->email,
+            'photo' => $userPhotoPath,
+            'body' => $request->body
+        ];
+
+        CommentReply::create($data);
+
+        return redirect()->back();
     }
 
     /**

@@ -65,7 +65,6 @@ class PostCommentsController extends Controller
 
         Session::flash('crudCommentMsg', 'Your comment has been submitted and is waiting for moderation approval');
 
-        // return view('post');
         return redirect()->back();
     }
 

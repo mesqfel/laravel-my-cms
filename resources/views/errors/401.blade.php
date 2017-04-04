@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Page not found</title>
+        <title>Not authorized</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -41,8 +41,8 @@
         <div class="container">
             <div class="content">
                 <div class="title">
-                    Error 404<br>
-                    Oops! We couldn't find the page you are looking for
+                    Error 401<br>
+                    Oops! You are not authorized to perform this request
                 </div>
             </div>
         </div>

@@ -97,9 +97,9 @@
                     <a class="pull-left" href="#">
                         
                         @if($_comment->photo)
-                            <img height="50" class="media-object" src="{{$_comment->photo}}" alt="">
+                            <img height="40" class="media-object" src="{{$_comment->photo}}" alt="">
                         @else
-                            <img height="50" class="media-object" src="/images/profile-placeholder.jpg" alt="">
+                            <img height="40" class="media-object" src="/images/profile-placeholder.jpg" alt="">
                         @endif
 
                     </a>
@@ -112,6 +112,78 @@
                         </h4>
 
                         {{$_comment->body}}
+
+                        <p>
+                            <a href="javascript:void(0);" style="font-size: 13px;" class="reply-comment">
+                                <i class="fa fa-comment-o"></i> Reply
+                            </a>
+                        </p>
+
+                        <div class="media">
+
+                            <?php
+                                $repliesSectionMarginBottom = '';
+                                if(count($_comment->replies)) 
+                                    $repliesSectionMarginBottom = 'margin-bottom: 15px;';
+                            ?>
+
+                            <div style="{{$repliesSectionMarginBottom}}">
+
+                                {{-- replies --}}
+                                @if(count($_comment->replies))
+
+
+                                    @foreach($_comment->replies as $reply)
+
+                                        <div class="media">
+                                            <a class="pull-left" href="#">
+                                                {{-- <img class="media-object" src="http://placehold.it/64x64" alt=""> --}}
+
+                                                @if($reply->photo)
+                                                    <img height="40" class="media-object" src="{{$reply->photo}}" alt="">
+                                                @else
+                                                    <img height="40" class="media-object" src="/images/profile-placeholder.jpg" alt="">
+                                                @endif
+
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">
+                                                    {{$reply->author}}
+
+                                                    <small>{{$reply->created_at->format('F j, Y \a\t g:ia')}}</small>
+                                                </h4>
+                                                {{$reply->body}}
+
+                                            </div>
+                                        </div>
+
+                                    @endforeach
+
+                                @endif
+
+                            </div>
+
+                            <div>
+                                {!! Form::open(['method' => 'POST', 'action' => 'CommentRepliesController@store', 'style' => "display: none;"]) !!}
+
+                                    {!! Form::hidden('comment_id', $_comment->id) !!}
+
+                                    <div class="form-group div-reply">
+
+                                        {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Reply...', 'rows' => 1]) !!}
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        {!! Form::submit('Reply', ['class' => 'btn btn-primary']); !!}
+
+                                    </div>
+
+                                {!! Form::close() !!}
+                            </div>
+                        
+                        </div>
 
                     </div>
                 </div>
@@ -158,3 +230,26 @@
     <a href="#">{{$post->category->name}}</a>
 @endsection
 
+
+@section('scripts')
+
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function(){
+
+            $(document).on('click', '.reply-comment', function(){
+
+                $(this).parent().next().children().last().children().show();
+                $(this).parent().next().children().last().children().children('.div-reply').children('textarea').focus();
+
+            });
+
+        });
+
+    </script>
+
+
+
+@endsection
