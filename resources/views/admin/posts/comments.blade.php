@@ -23,6 +23,7 @@
 		        <th>Author Photo</th>
 		        <th>Author Email</th>
 		        <th>Comment</th>
+		        <th>Replies</th>
 		        <th>Moderate</th>
 		        <th></th>
 		      </tr>
@@ -47,6 +48,12 @@
 
 					<td>{{$comment->email}}</td>
 					<td>{{$comment->body}}</td>
+
+					<td>
+						<a href="{{route('admin.comments.replies', $comment->id)}}">
+							<i class="fa fa-comments-o"></i>
+						</a>
+					</td>
 
 					{{-- Moderate --}}
 					<td>

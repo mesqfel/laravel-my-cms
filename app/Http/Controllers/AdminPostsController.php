@@ -38,7 +38,7 @@ class AdminPostsController extends Controller
     public function create()
     {
 
-        $categories = Category::lists('name', 'id');
+        $categories = Category::pluck('name', 'id');
 
         return view('admin.posts.create', compact('categories'));
     }
@@ -93,7 +93,7 @@ class AdminPostsController extends Controller
         if(!$post)
             return redirect(404);
 
-        $categories = Category::lists('name', 'id');
+        $categories = Category::pluck('name', 'id');
 
         return view('admin.posts.edit', compact('post', 'categories'));
     }
