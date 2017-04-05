@@ -36,7 +36,7 @@ class AdminUsersController extends Controller
     public function create()
     {
 
-        $roles = Role::lists('name', 'id');
+        $roles = Role::pluck('name', 'id');
 
         return view('admin.users.create', compact('roles'));
     }
@@ -93,7 +93,7 @@ class AdminUsersController extends Controller
         if(!$user)
             return redirect(404);
 
-        $roles = Role::lists('name', 'id');
+        $roles = Role::pluck('name', 'id');
 
         return view('admin.users.edit', compact('user', 'roles'));
     }
