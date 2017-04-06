@@ -1,0 +1,10 @@
+> Criar pagina que lista todos os posts de determinada categoria
+
+> Criar pagina da seção Admin. Listar:
+	> Numero de usuarios cadastrados
+	> Numero de Posts
+	> Numero de Comentarios
+	> ...
+	
+OPCIONAL
+> Criar pagina q lista os posts de um usuario

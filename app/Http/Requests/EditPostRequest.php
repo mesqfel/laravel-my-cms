@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class PostRequest extends Request
+class EditPostRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class PostRequest extends Request
         return [
             'title' => 'required|max:255',
             'body' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
         ];
     }
 }

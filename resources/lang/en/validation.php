@@ -104,6 +104,9 @@ return [
         'category_id' => [
             'required' => 'The category field is required.',
         ],
+        'photo_id' => [
+            'required' => 'The image field is required.',
+        ],
     ],
 
     /*

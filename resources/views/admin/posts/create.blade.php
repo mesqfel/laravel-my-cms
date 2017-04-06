@@ -55,6 +55,5 @@
 @section('footer')
 
 	@include('includes.tinyMceEditor')
-	
 
 @endsection
