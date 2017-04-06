@@ -64,6 +64,7 @@
         {!! Form::open(['method' => 'POST', 'action' => 'PostCommentsController@store']) !!}
 
             {!! Form::hidden('post_id', $post->id) !!}
+            {!! Form::hidden('is_active', 1) !!}
 
             <div class="form-group">
 
@@ -171,6 +172,7 @@
                                 {!! Form::open(['method' => 'POST', 'action' => 'CommentRepliesController@store', 'style' => "display: none;"]) !!}
 
                                     {!! Form::hidden('comment_id', $_comment->id) !!}
+                                    {!! Form::hidden('is_active', 1) !!}
 
                                     <div class="form-group div-reply">
 

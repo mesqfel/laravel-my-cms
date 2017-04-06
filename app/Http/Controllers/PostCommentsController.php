@@ -55,6 +55,7 @@ class PostCommentsController extends Controller
 
         $data = [
             'post_id' => $request->post_id,
+            'is_active' => $request->is_active,
             'author' => $user->name,
             'email' => $user->email,
             'photo' => $userPhotoPath,
@@ -62,8 +63,6 @@ class PostCommentsController extends Controller
         ];
 
         Comment::create($data);
-
-        Session::flash('crudCommentMsg', 'Your comment has been submitted and is waiting for moderation approval');
 
         return redirect()->back();
     }

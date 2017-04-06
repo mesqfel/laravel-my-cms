@@ -51,6 +51,7 @@ class CommentRepliesController extends Controller
 
         $data = [
             'comment_id' => $request->comment_id,
+            'is_active' => $request->is_active,
             'author' => $user->name,
             'email' => $user->email,
             'photo' => $userPhotoPath,
