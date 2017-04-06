@@ -1,15 +1,15 @@
 
-> Criar pagina da seção Admin. Listar:
-	> Numero de usuarios cadastrados
-	> Numero de Posts
-	> Numero de Comentarios
-	> ...
+> Criar a home
+
+> Colocar o menu do Usuario logado no header da pagina de um post do blog Ex: Felipe Mesquita -> Logout
 	
 > Deixar um usuario nao logado fazer comentarios
 
 > Acertar a pagina inicial e os redirecionamentos apos login. Remover botao de esqueci a senha
+
+> Limpar codigo, remover codigo comentado
 	
 OPCIONAL
-> Criar pagina q lista os posts de um usuario
+> Criar pagina q lista os posts de um usuario dentro de admin e fora de admin
 
 > Criar pagina que lista todos os posts de determinada categoria

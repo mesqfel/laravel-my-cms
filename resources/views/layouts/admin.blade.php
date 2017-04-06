@@ -44,11 +44,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Dashboard</a>
+            <a class="navbar-brand" href="{{route('admin.index')}}">Dashboard</a>
+
+            <a class="navbar-brand" href="{{route('home.index')}}">Home</a> 
         </div>
         <!-- /.navbar-header -->
-
-
 
         <ul class="nav navbar-top-links navbar-right">
 

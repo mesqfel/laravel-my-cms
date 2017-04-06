@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.blog-home')
 
 @section('content')
-<div class="container">
+
+<div class="container" style="margin-top: 50px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -53,8 +54,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-sign-in"></i> Login
                                 </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>
                         </div>
                     </form>
@@ -63,4 +62,5 @@
         </div>
     </div>
 </div>
+
 @endsection

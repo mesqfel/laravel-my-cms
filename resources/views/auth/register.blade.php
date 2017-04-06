@@ -1,13 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.blog-home')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 50px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -36,6 +36,17 @@
                                     </span>
                                 @endif
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="photo_id" class="col-md-4 control-label">Profile Photo</label>
+
+                            <div class="col-md-6">
+
+                                <input id="photo_id" name="photo_id" type="file">
+
+                            </div>
+
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
