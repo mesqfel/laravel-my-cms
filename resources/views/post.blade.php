@@ -14,9 +14,16 @@
     <hr>
 
     <!-- Date/Time -->
-    {{-- <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p> --}}
     <p><span class="glyphicon glyphicon-time"></span> Posted on {{$post->created_at->format('F j, Y \a\t g:ia')}}</p>
-    <h5><span class="label label-primary">{{$post->category->name}}</span></h5>
+    
+    {{-- Category --}}
+    <h5>
+        <a href="{{route('home.category.posts', strtolower($post->category->name))}}" style="cursor: pointer; text-decoration: none !important;">
+            <span class="label label-primary">
+                {{$post->category->name}}
+            </span>
+        </a>
+    </h5>
 
     
 

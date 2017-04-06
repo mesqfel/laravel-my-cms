@@ -12,12 +12,6 @@
     <title>Blog Home - Start Bootstrap Template</title>
 
     <!-- Bootstrap Core CSS -->
-    {{-- <link href="css/bootstrap.min.css" rel="stylesheet"> --}}
-
-    <!-- Custom CSS -->
-    {{-- <link href="css/blog-home.css" rel="stylesheet"> --}}
-
-    <!-- Bootstrap Core CSS -->
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/libs.css')}}" rel="stylesheet">
@@ -44,14 +38,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Mesqfel Blog</a>
+                <a class="navbar-brand" href="{{ url('/') }}">Mesqfel Blog</a>
             </div>
             
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 
                 <ul class="nav navbar-nav">
-                    @if(Auth::check())
+                    @if(Auth::check() && Auth::user()->isAdmin())
                         <li><a href="{{ url('/admin') }}">Admin</a></li>
                     @endif
                 </ul>
@@ -86,7 +80,7 @@
         <div class="row">
 
             <!-- Blog Entries Column -->
-            <div class="col-lg-12">
+            <div class="col-lg-8 col-lg-offset-2">
 
                 @yield('content')
 

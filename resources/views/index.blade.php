@@ -17,13 +17,26 @@
         </p>
             
         <p>
+
+            {{-- Date/time --}}
             <span class="glyphicon glyphicon-time"></span> Posted on {{$post->created_at->format('F j, Y \a\t g:ia')}}
-            <h5><span class="label label-primary">{{$post->category->name}}</span></h5>
+
+            {{-- Category --}}
+            <h5>
+                <a href="{{route('home.category.posts', strtolower($post->category->name))}}" style="cursor: pointer; text-decoration: none !important;">
+                    <span class="label label-primary">
+                        {{$post->category->name}}
+                    </span>
+                </a>
+            </h5>
+
         </p>
 
         <hr>        
 
-        <img class="img-responsive" src="{{$post->photo->path}}" style="margin: 0 auto; max-height: 400px;">
+        <a href="{{route('home.post', $post->slug)}}">
+            <img class="img-responsive" src="{{$post->photo->path}}" style="margin: 0 auto; max-height: 400px;">
+        </a> 
         
         <hr>
 
@@ -31,7 +44,9 @@
             {{str_limit(strip_tags($post->body), 500)}}
         </p>
 
-        <a class="btn btn-primary" href="{{route('home.post', $post->slug)}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+        <a class="btn btn-primary" href="{{route('home.post', $post->slug)}}">
+            Read More <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
 
         <hr>
 

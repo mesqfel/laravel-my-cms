@@ -1,15 +1,14 @@
 
-> Criar a home
+> Fazer a pagina de um post estender @extends('layouts.blog-home') ou sei lá...atualmente ele estende desnecessariamente @extends('layouts.blog-post'). A diferenca eh q um tem a secao de comentarios e o outro nao
 
-> Colocar o menu do Usuario logado no header da pagina de um post do blog Ex: Felipe Mesquita -> Logout
-	
-> Deixar um usuario nao logado fazer comentarios
+> Fazer esquema de salvar no banco de dados a categoria em tudo minusculo
 
-> Acertar a pagina inicial e os redirecionamentos apos login. Remover botao de esqueci a senha
+> Fazer um accessor no model da categoria para trazer a categoria com a primeira letra Maiuscula
 
-> Limpar codigo, remover codigo comentado
-	
-OPCIONAL
+> Fazer pagina admin q lista todos os pots de determinada categoria
+
 > Criar pagina q lista os posts de um usuario dentro de admin e fora de admin
 
-> Criar pagina que lista todos os posts de determinada categoria
+> Deixar um usuario nao logado fazer comentarios
+
+> Limpar codigo, remover codigo comentado

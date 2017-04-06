@@ -13,11 +13,14 @@
 
 Route::get('/', ['as'=>'home.index', 'uses' => 'HomeController@index']);
 
+Route::get('/category/{category}/posts', ['as'=>'home.category.posts', 'uses' => 'HomeController@postsByCategory']);
+
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::auth();
 
 Route::get('/post/{id}', ['as'=>'home.post', 'uses' => 'AdminPostsController@post']);
+
 
 Route::group(['middleware' => 'admin'], function(){
 
