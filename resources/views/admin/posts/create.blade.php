@@ -50,3 +50,11 @@
 	{!! Form::close() !!}
 
 @endsection
+
+
+@section('footer')
+
+	@include('includes.tinyMceEditor')
+	
+
+@endsection
