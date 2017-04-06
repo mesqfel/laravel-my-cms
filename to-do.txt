@@ -1,4 +1,3 @@
-> Criar pagina que lista todos os posts de determinada categoria
 
 > Criar pagina da seção Admin. Listar:
 	> Numero de usuarios cadastrados
@@ -6,5 +5,11 @@
 	> Numero de Comentarios
 	> ...
 	
+> Deixar um usuario nao logado fazer comentarios
+
+> Acertar a pagina inicial e os redirecionamentos apos login. Remover botao de esqueci a senha
+	
 OPCIONAL
 > Criar pagina q lista os posts de um usuario
+
+> Criar pagina que lista todos os posts de determinada categoria

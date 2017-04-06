@@ -2,8 +2,7 @@
 
 @section('content')
 
-	<h1>Create Category</h1>
-
+	<h1 class="page-header">Create Category</h1>
 
 	@include('includes.formErrorsMessages')
 

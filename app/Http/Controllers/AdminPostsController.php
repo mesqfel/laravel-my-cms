@@ -180,5 +180,36 @@ class AdminPostsController extends Controller
         return view('admin.posts.comments', compact('post'));
     }
 
+    public function multipleDestroy(Request $request)
+    {
+
+        $postsIdToBeDeleted = $request->postsCheckboxArray;
+
+        foreach ($postsIdToBeDeleted as $postId) {
+
+            $post = Post::findOrFail($postId);
+
+            $imgPath = '';
+            if($photo = $post->photo){
+                $imgPath = public_path().$post->photo->path;
+            }
+
+            $post->delete();
+            
+            if($imgPath){
+                unlink($imgPath);
+                $photo->delete();
+            }
+            
+        }
+
+        if(count($postsIdToBeDeleted) > 1)
+            Session::flash('crudPostMsg', 'The posts have been deleted successfully');
+        else
+            Session::flash('crudPostMsg', 'The post has been deleted successfully');
+
+        return redirect('/admin/posts');
+    }
+
 
 }

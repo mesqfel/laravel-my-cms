@@ -2,7 +2,7 @@
 
  @section('content')
 
-	<h1>Replies for Comment id {{$comment->id}} </h1>
+	<h1 class="page-header">Replies for Comment id {{$comment->id}}</h1>
 
 	@if(Session::has('crudCommentReplyMsg'))
 

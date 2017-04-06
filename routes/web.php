@@ -25,9 +25,11 @@ Route::get('/post/{id}', ['as'=>'home.post', 'uses' => 'AdminPostsController@pos
 
 Route::group(['middleware' => 'admin'], function(){
 
-	Route::get('/admin', function () {
-	    return view('admin.index');
-	});
+	// Route::get('/admin', function () {
+	//     return view('admin.index');
+	// });
+
+	Route::get('/admin', ['as'=>'admin.index', 'uses' => 'AdminDashboardController@index']);
 
 	Route::resource('/admin/users', 'AdminUsersController', [
 		'names' => [
@@ -52,6 +54,8 @@ Route::group(['middleware' => 'admin'], function(){
 			'destroy' => 'admin.posts.destroy'
 		]
 	]);
+
+	Route::post('/admin/posts/multidestroy', ['as'=>'admin.posts.multidestroy', 'uses' => 'AdminPostsController@multipleDestroy']);
 
 	Route::get('/admin/posts/{id}/comments', ['as'=>'admin.posts.comments', 'uses' => 'AdminPostsController@showComments']);
 

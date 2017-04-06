@@ -2,7 +2,7 @@
 
  @section('content')
 
-	<h1>Edit Post</h1>
+	<h1 class="page-header">Edit Post</h1>
 
 	@include('includes.formErrorsMessages')
 

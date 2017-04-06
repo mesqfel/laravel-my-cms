@@ -2,7 +2,7 @@
 
  @section('content')
 
-	<h1>Categories</h1>
+	<h1 class="page-header">Categories</h1>
 
 	@if(Session::has('crudCategoryMsg'))
 

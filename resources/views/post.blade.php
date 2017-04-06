@@ -16,14 +16,14 @@
     <!-- Date/Time -->
     {{-- <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p> --}}
     <p><span class="glyphicon glyphicon-time"></span> Posted on {{$post->created_at->format('F j, Y \a\t g:ia')}}</p>
+    <h5><span class="label label-primary">{{$post->category->name}}</span></h5>
 
     
 
     <hr>
 
     <!-- Preview Image -->
-    {{-- <img class="img-responsive" src="http://placehold.it/900x300" alt=""> --}}
-    <img class="img-responsive" src="{{$post->photo->path}}" alt="">
+    <img class="img-responsive" src="{{$post->photo->path}}" style="margin: 0 auto; max-height: 400px;">
     
 
     <hr>
@@ -201,12 +201,6 @@
     </div>
 
 @endsection
-
-
-@section('category')
-    <a href="#">{{$post->category->name}}</a>
-@endsection
-
 
 @section('scripts')
 

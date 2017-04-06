@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h1>Users</h1>
+	<h1 class="page-header">Users</h1>
 
 	@if(Session::has('crudUserMsg'))
 

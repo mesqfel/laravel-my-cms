@@ -2,7 +2,7 @@
 
  @section('content')
 
-	<h1>Media</h1>
+	<h1 class="page-header">Images</h1>
 
 	@if(Session::has('crudMediaMsg'))
 
@@ -22,7 +22,6 @@
 		        <th>Id</th>
 		        <th>Image</th>
 		        <th>Name</th>
-		        <th></th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -37,19 +36,6 @@
 					    </div>
 					</td>
 					<td>{{str_replace('/images/',  '',$photo->path)}}</td>
-					<td>
-
-						{!! Form::open(['method' => 'DELETE', 'action' => ['AdminMediaController@destroy', $photo->id]  ]) !!}
-
-							<div class="form-group">
-
-								{!! Form::submit('Delete', ['class' => 'btn btn-danger']); !!}
-
-							</div>
-
-						{!! Form::close() !!}
-
-					</td>
 
 				</tr>
 

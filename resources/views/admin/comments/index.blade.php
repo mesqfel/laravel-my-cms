@@ -2,7 +2,7 @@
 
  @section('content')
 
-	<h1>Comments</h1>
+	<h1 class="page-header">Comments</h1>
 
 	@if(Session::has('crudCommentMsg'))
 

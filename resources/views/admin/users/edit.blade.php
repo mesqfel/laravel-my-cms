@@ -2,9 +2,7 @@
 
 @section('content')
 
-
-	<h1>Edit User</h1>
-
+	<h1 class="page-header">Edit User</h1>
 
 	@include('includes.formErrorsMessages')
 
