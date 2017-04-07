@@ -1,14 +1,14 @@
-@extends('layouts.blog-post')
+@extends('layouts.blog-home')
 
 @section('content')
 
     
     <!-- Title -->
-    <h1>{{$post->title}}</h1>
+    <h1 class="page-header" style="border-bottom: 0px; margin-bottom: 0px;">{{$post->title}}</h1>
 
     <!-- Author -->
     <p class="lead">
-        by <a href="#">{{$post->user->name}}</a>
+        by <a href="{{route('home.user.posts', $post->user->slug)}}">{{$post->user->name}}</a>
     </p>
 
     <hr>

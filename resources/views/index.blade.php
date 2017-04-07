@@ -13,7 +13,7 @@
         </h2>
         
         <p class="lead">
-            by <a href="index.php">{{$post->user->name}}</a>
+            by <a href="{{route('home.user.posts', $post->user->slug)}}">{{$post->user->name}}</a>
         </p>
             
         <p>

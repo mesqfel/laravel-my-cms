@@ -208,7 +208,7 @@ class AdminPostsController extends Controller
         else
             Session::flash('crudPostMsg', 'The post has been deleted successfully');
 
-        return redirect('/admin/posts');
+        return redirect()->back();
     }
 
 

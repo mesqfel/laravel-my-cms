@@ -4,8 +4,13 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Cviebrock\EloquentSluggable\Sluggable;
+
 class User extends Authenticatable
 {
+
+    use Sluggable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +28,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
     public function role(){
 

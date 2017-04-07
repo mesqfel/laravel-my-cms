@@ -21,6 +21,7 @@
 		      <tr>
 		        <th>Id</th>
 		        <th>Name</th>
+		        <th>Posts</th>
 		        <th>Edit</th>
 		      </tr>
 		    </thead>
@@ -31,6 +32,13 @@
 				<tr>
 					<td>{{$category->id}}</td>
 					<td>{{$category->name}}</td>
+
+					<td>
+						<a href="{{route('admin.category.posts', $category->id)}}">
+							<i class="fa fa-eye"></i>
+						</a>
+					</td>
+
 					<td>
 						<a href="{{route('admin.categories.edit', $category->id)}}">
 							<i class="fa fa-edit"></i>

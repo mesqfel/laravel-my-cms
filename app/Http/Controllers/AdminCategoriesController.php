@@ -111,4 +111,18 @@ class AdminCategoriesController extends Controller
 
         return redirect('/admin/categories');
     }
+
+    public function postsByCategory($id)
+    {
+
+        $category = Category::find($id);
+
+        if(!$category)
+            return redirect(404);
+
+        $posts = $category->posts()->latest()->paginate(10);
+        $category = $category->name;
+
+        return view('admin.categories.posts', compact('posts', 'category'));
+    }
 }

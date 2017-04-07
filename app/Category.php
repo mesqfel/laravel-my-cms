@@ -15,4 +15,16 @@ class Category extends Model
 		return $this->hasMany('App\Post');
 
     }
+
+    public function getNameAttribute($value){
+        
+        return ucfirst($value);
+
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
 }

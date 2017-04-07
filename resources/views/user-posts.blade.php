@@ -3,7 +3,7 @@
 @section('content')
 
     <h1 class="page-header">
-        {{$category}} Articles
+        Articles by {{$user}}
     </h1>
 
     @if(count($posts))
@@ -15,12 +15,21 @@
             </h2>
             
             <p class="lead">
-                by <a href="{{route('home.user.posts', $post->user->slug)}}">{{$post->user->name}}</a>
+                by <a href="#">{{$post->user->name}}</a>
             </p>
                 
             <p>
                 <span class="glyphicon glyphicon-time"></span> Posted on {{$post->created_at->format('F j, Y \a\t g:ia')}}
-                <h5><span class="label label-primary">{{$post->category->name}}</span></h5>
+
+                {{-- Category --}}
+                <h5>
+                    <a href="{{route('home.category.posts', strtolower($post->category->name))}}" style="cursor: pointer; text-decoration: none !important;">
+                        <span class="label label-primary">
+                            {{$post->category->name}}
+                        </span>
+                    </a>
+                </h5>
+
             </p>
 
             <hr>        
@@ -53,7 +62,7 @@
 
         <div class="alert alert-warning">
             
-            No posts to show for this category
+            No posts to show for this user
 
         </div>
 

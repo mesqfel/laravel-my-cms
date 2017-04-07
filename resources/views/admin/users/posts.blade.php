@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h1 class="page-header">Posts</h1>
+	<h1 class="page-header">Posts by {{$user}}</h1>
 
 @if(Session::has('crudPostMsg'))
 
@@ -99,7 +99,7 @@
 @else
 
 	<div class="alert alert-danger">
-		No posts to show
+		No posts to show for this user
 	</div>
 
 @endif

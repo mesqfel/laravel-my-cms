@@ -15,6 +15,8 @@ Route::get('/', ['as'=>'home.index', 'uses' => 'HomeController@index']);
 
 Route::get('/category/{category}/posts', ['as'=>'home.category.posts', 'uses' => 'HomeController@postsByCategory']);
 
+Route::get('/user/{user}/posts', ['as'=>'home.user.posts', 'uses' => 'HomeController@postsByUser']);
+
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::auth();
@@ -37,6 +39,8 @@ Route::group(['middleware' => 'admin'], function(){
 			'destroy' => 'admin.users.destroy'
 		]
 	]);
+
+	Route::get('/admin/user/{id}/posts', ['as'=>'admin.user.posts', 'uses' => 'AdminUsersController@postsByUser']);
 
 	Route::resource('/admin/posts', 'AdminPostsController', [
 		'names' => [
@@ -65,6 +69,8 @@ Route::group(['middleware' => 'admin'], function(){
 			'destroy' => 'admin.categories.destroy'
 		]
 	]);
+
+	Route::get('/admin/category/{id}/posts', ['as'=>'admin.category.posts', 'uses' => 'AdminCategoriesController@postsByCategory']);
 
 	Route::resource('/admin/media', 'AdminMediaController', [
 		'names' => [

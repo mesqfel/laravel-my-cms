@@ -22,6 +22,7 @@
 	        <th>Name</th>
 	        <th>Role</th>
 	        <th>Email</th>
+	        <th>Posts</th>
 	        <th>Status</th>
 	        <th>Edit</th>
 	      </tr>
@@ -44,6 +45,13 @@
 				<td>{{$user->name}}</td>
 				<td>{{$user->role->name}}</td>
 				<td>{{$user->email}}</td>
+
+				<td>
+					<a href="{{route('admin.user.posts', $user->id)}}">
+						<i class="fa fa-eye"></i>
+					</a>
+				</td>
+
 				<td>{{$user->is_active ? 'Active' : 'Not Active'}}</td>
 				<td>
 					<a href="{{route('admin.users.edit', $user->id)}}">

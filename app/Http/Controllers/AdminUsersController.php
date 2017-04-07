@@ -118,6 +118,7 @@ class AdminUsersController extends Controller
             $inputs['photo_id'] = $photo->id;
         }
 
+        $user->slug = null;
         $user->update($inputs);
 
         Session::flash('crudUserMsg', 'The user has been edited successfully');
@@ -151,5 +152,19 @@ class AdminUsersController extends Controller
         Session::flash('crudUserMsg', 'The user has been deleted successfully');
 
         return redirect('/admin/users');
+    }
+
+    public function postsByUser($id)
+    {
+
+        $user = User::find($id);
+
+        if(!$user)
+            return redirect(404);
+
+        $posts = $user->posts()->latest()->paginate(10);
+        $user = $user->name;
+
+        return view('admin.users.posts', compact('posts', 'user'));
     }
 }

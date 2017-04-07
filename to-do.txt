@@ -1,14 +1,7 @@
 
-> Fazer a pagina de um post estender @extends('layouts.blog-home') ou sei lá...atualmente ele estende desnecessariamente @extends('layouts.blog-post'). A diferenca eh q um tem a secao de comentarios e o outro nao
-
-> Fazer esquema de salvar no banco de dados a categoria em tudo minusculo
-
-> Fazer um accessor no model da categoria para trazer a categoria com a primeira letra Maiuscula
-
-> Fazer pagina admin q lista todos os pots de determinada categoria
-
-> Criar pagina q lista os posts de um usuario dentro de admin e fora de admin
 
 > Deixar um usuario nao logado fazer comentarios
 
-> Limpar codigo, remover codigo comentado
+> Após o login a partir da pagina de um post ele está redirecionando para pagina admin/comments ???
+
+> Limpar codigo, remover codigo comentado, remover arquivos desnecessários

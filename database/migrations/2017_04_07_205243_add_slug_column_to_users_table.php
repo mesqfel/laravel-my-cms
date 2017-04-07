@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSlugColumnToPostsTable extends Migration
+class AddSlugColumnToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +13,7 @@ class AddSlugColumnToPostsTable extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->string('slug');
         });
     }
@@ -24,7 +25,7 @@ class AddSlugColumnToPostsTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('slug');
         });
     }
