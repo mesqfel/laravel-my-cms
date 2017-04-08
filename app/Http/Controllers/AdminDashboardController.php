@@ -14,10 +14,6 @@ class AdminDashboardController extends Controller
     public function index()
     {
 
-    	// return 'admin index';
-
-    	// dd(User::count());
-
     	$dashInfo = [
     		'users' => User::count(),
     		'posts' => Post::count(),

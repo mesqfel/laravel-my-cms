@@ -1,5 +1,0 @@
-
-
-> Após o login a partir da pagina de um post ele está redirecionando para pagina admin/comments ???
-
-> Limpar codigo, remover codigo comentado, remover arquivos desnecessários

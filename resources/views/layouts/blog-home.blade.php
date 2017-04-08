@@ -90,12 +90,14 @@
         <!-- /.row -->
 
         <!-- Footer -->
-        <footer>
-{{--             <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+        <footer style="text-align: center;">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <p style="font-size: 12px;">
+                        Made with <i class="fa fa-heart"></i> by Felipe Mesquita
+                    </p>
                 </div>
-            </div> --}}
+            </div>
         </footer>
 
     </div>

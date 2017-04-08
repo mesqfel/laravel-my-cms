@@ -95,8 +95,6 @@
 
 					</td>
 
-
-					{{-- <td>{{$comment->is_active ? 'Active' : 'Not active'}}</td> --}}
 				</tr>
 
 		    @endforeach
