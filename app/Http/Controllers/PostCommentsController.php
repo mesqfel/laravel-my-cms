@@ -45,26 +45,35 @@ class PostCommentsController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        
-        $user = Auth::user();
 
         $userPhotoPath = '';
-        if($user->photo){
-            $userPhotoPath = $user->photo->path;
+        $author = 'Visitor';
+        $email = '';
+
+        if(Auth::check()){
+
+            $user = Auth::user();
+
+            if($user->photo){
+                $userPhotoPath = $user->photo->path;
+            }
+
+            $author = $user->name;
+            $email = $user->email;
         }
 
         $data = [
             'post_id' => $request->post_id,
             'is_active' => $request->is_active,
-            'author' => $user->name,
-            'email' => $user->email,
+            'author' => $author,
+            'email' => $email,
             'photo' => $userPhotoPath,
             'body' => $request->body
         ];
 
-        Comment::create($data);
+        $comment = Comment::create($data);
 
-        return redirect()->back();
+        return $comment;
     }
 
     /**

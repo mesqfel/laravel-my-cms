@@ -3,7 +3,7 @@
 @section('content')
 
     <h1 class="page-header">
-        {{$category}} Articles
+        {{$category}} Posts
     </h1>
 
     @if(count($posts))

@@ -68,10 +68,10 @@
 
         @endif
 
-        {!! Form::open(['method' => 'POST', 'action' => 'PostCommentsController@store']) !!}
-
             {!! Form::hidden('post_id', $post->id) !!}
             {!! Form::hidden('is_active', 1) !!}
+
+            {{ csrf_field() }}
 
             <div class="form-group">
 
@@ -81,11 +81,9 @@
 
             <div class="form-group">
 
-                {!! Form::submit('Submit', ['class' => 'btn btn-primary']); !!}
+                {!! Form::button('Submit', ['class' => 'btn btn-primary', 'id' => 'submitComment']); !!}
 
             </div>
-
-        {!! Form::close() !!}
 
     </div>
 
@@ -95,7 +93,7 @@
 
     <!-- Comment -->
 
-    <div>
+    <div id="divComments">
 
         @foreach($post->comments as $_comment)
 
@@ -147,7 +145,6 @@
 
                                             <div class="media">
                                                 <a class="pull-left" href="#">
-                                                    {{-- <img class="media-object" src="http://placehold.it/64x64" alt=""> --}}
 
                                                     @if($reply->photo)
                                                         <img height="40" class="media-object" src="{{$reply->photo}}" alt="">
@@ -175,13 +172,14 @@
 
                             </div>
 
-                            <div>
-                                {!! Form::open(['method' => 'POST', 'action' => 'CommentRepliesController@store', 'style' => "display: none;"]) !!}
+                            <div class="div-reply" style="display: none;">
+                                {{-- {!! Form::open(['method' => 'POST', 'action' => 'CommentRepliesController@store', 'style' => "display: none;"]) !!} --}}
 
+                                    {{ csrf_field() }}
                                     {!! Form::hidden('comment_id', $_comment->id) !!}
                                     {!! Form::hidden('is_active', 1) !!}
 
-                                    <div class="form-group div-reply">
+                                    <div class="form-group div-reply-textarea">
 
                                         {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Reply...', 'rows' => 1]) !!}
 
@@ -189,11 +187,11 @@
 
                                     <div class="form-group">
 
-                                        {!! Form::submit('Reply', ['class' => 'btn btn-primary']); !!}
+                                        {!! Form::button('Reply', ['class' => 'btn btn-primary btn-reply']); !!}
 
                                     </div>
 
-                                {!! Form::close() !!}
+                                {{-- {!! Form::close() !!} --}}
                             </div>
                         
                         </div>
@@ -211,16 +209,142 @@
 
 @section('scripts')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js"></script>
+
 
     <script type="text/javascript">
 
 
         $(document).ready(function(){
 
+            // Submit a comment via AJAX
+            $(document).on('click', '#submitComment', function(){
+
+                data = {
+                    '_token' : $(this).parent().parent().children('[name="_token"]').val(),
+                    'post_id' : $(this).parent().parent().children('[name="post_id"]').val(),
+                    'is_active' : $(this).parent().parent().children('[name="is_active"]').val(),
+                    'body' : $(this).parent().prev().children().val(),
+                };
+
+                var commentTextareaElem = $(this).parent().prev().children();
+
+                $.post("{{route('admin.comments.store')}}", data)
+                    .done(function( res ) {
+
+                        var html = '';
+
+                        html += '<div class="media">';
+                            html += '<a class="pull-left" href="#">';
+
+                                if(res.photo)
+                                    html += '<img height="40" class="media-object" src="'+res.photo+'" alt="">';
+                                else
+                                    html += '<img height="40" class="media-object" src="/images/profile-placeholder.jpg" alt="">';
+                                    
+                            html += '</a>';
+                            html += '<div class="media-body">';
+                                html += '<h4 class="media-heading">';
+                                    html += res.author;
+                                    html += ' <small>'+$.format.date(res.created_at, "MMMM d, yyyy")+' at '+$.format.date(res.created_at, "h:mma")+'</small>';
+                                html += '</h4>';
+                                    html += res.body;
+                                html += '<p>';
+                                    html += '<a href="javascript:void(0);" style="font-size: 13px;" class="reply-comment">';
+                                        html += '<i class="fa fa-comment-o"></i> Reply';
+                                    html += '</a>';
+                                html += '</p>';
+                                html += '<div class="media">';
+                                    html += '<div></div>';
+                                    html += '<div class="div-reply" style="display: none;">';
+                                        html += '{{ csrf_field() }}';
+                                        html += '<input name="comment_id" type="hidden" value="'+res.id+'">';
+                                        html += '<input name="is_active" type="hidden" value="1">';
+                                        html += '<div class="form-group div-reply-textarea">';
+                                            html += '<textarea class="form-control" placeholder="Reply..." rows="1" name="body" cols="50"></textarea>';
+                                        html += '</div>';
+                                        html += '<div class="form-group">';
+                                            html += '<input class="btn btn-primary btn-reply" type="submit" value="Reply">';
+                                        html += '</div>';
+                                    html += '</div>';
+                                html += '</div>';
+                            html += '</div>';
+                        html += '</div>';
+                        
+                        $('#divComments').prepend(html);
+
+                        commentTextareaElem.val('');
+
+                    })
+                    .fail(function(err) {
+                        console.log('error!!');
+                        console.log(err);
+                    });
+            });
+
+            // Clicked to show reply comment form
             $(document).on('click', '.reply-comment', function(){
 
-                $(this).parent().next().children().last().children().show();
-                $(this).parent().next().children().last().children().children('.div-reply').children('textarea').focus();
+                $(this).parent().next().children('.div-reply').show();
+                $(this).parent().next().children('.div-reply').children('.div-reply-textarea').children('textarea').focus();
+
+            });
+
+            // Submit a reply via AJAX
+            $(document).on('click', '.btn-reply', function(){
+
+                var repliesDiv = $(this).parent().parent().parent().children('div:first');
+                var replyTextarea = $(this).parent().prev().children();
+
+                data = {
+                    '_token' : $(this).parent().parent('.div-reply').children('[name="_token"]').val(),
+                    'comment_id' : $(this).parent().parent('.div-reply').children('[name="comment_id"]').val(),
+                    'is_active' : $(this).parent().parent('.div-reply').children('[name="is_active"]').val(),
+                    'body' : $(this).parent().parent('.div-reply').children('.div-reply-textarea').children('[name="body"]').val(),
+                };
+
+                var replyTextareaElem = $(this).parent().parent('.div-reply').children('.div-reply-textarea').children('[name="body"]');
+
+                $.post("{{route('admin.comment.replies.store')}}", data)
+                    .done(function( res ) {
+
+                        var html = '';
+
+                        html += '<div class="media">';
+                            html += '<a class="pull-left" href="#">';
+
+                                if(res.photo)
+                                    html += '<img height="40" class="media-object" src="'+res.photo+'" alt="">';
+                                else
+                                    html += '<img height="40" class="media-object" src="/images/profile-placeholder.jpg" alt="">';
+
+                            html += '</a>';
+
+                            html += '<div class="media-body">';
+                                html += '<h4 class="media-heading">';
+                                    
+                                    html += res.author;
+                                    html += ' <small>'+$.format.date(res.created_at, "MMMM d, yyyy")+' at '+$.format.date(res.created_at, "h:mma")+'</small>';
+
+                                html += '</h4>';
+                                
+                                html += res.body;
+
+                            html += '</div>';
+                        html += '</div>';
+
+                        if(!$.trim(repliesDiv.html())){
+                            repliesDiv.css('margin-bottom', '15px');
+                        }
+
+                        repliesDiv.append(html);
+                        replyTextarea.val('');
+
+                    })
+                    .fail(function(err) {
+                        console.log('error!!');
+                        console.log(err);
+                    });
 
             });
 

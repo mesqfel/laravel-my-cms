@@ -23,7 +23,6 @@ Route::auth();
 
 Route::get('/post/{id}', ['as'=>'home.post', 'uses' => 'AdminPostsController@post']);
 
-
 Route::group(['middleware' => 'admin'], function(){
 
 	Route::get('/admin', ['as'=>'admin.index', 'uses' => 'AdminDashboardController@index']);
@@ -116,10 +115,6 @@ Route::group(['middleware' => 'admin'], function(){
 
 });
 
-Route::group(['middleware' => 'auth'], function(){
+Route::post('/admin/comments', ['as'=>'admin.comments.store', 'uses' => 'PostCommentsController@store']);
 
-	Route::post('/admin/comments', ['as'=>'admin.comments.store', 'uses' => 'PostCommentsController@store']);
-
-	Route::post('/admin/comment/replies', ['as'=>'admin.comment.replies.store', 'uses' => 'CommentRepliesController@store']);
-
-});
+Route::post('/admin/comment/replies', ['as'=>'admin.comment.replies.store', 'uses' => 'CommentRepliesController@store']);

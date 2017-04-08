@@ -3,7 +3,7 @@
 @section('content')
 
     <h1 class="page-header">
-        Latests Articles
+        Latests Posts
     </h1>
 
     @foreach($posts as $post)

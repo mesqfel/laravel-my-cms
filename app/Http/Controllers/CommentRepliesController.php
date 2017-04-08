@@ -42,25 +42,34 @@ class CommentRepliesController extends Controller
     public function store(Request $request)
     {
 
-        $user = Auth::user();
-
         $userPhotoPath = '';
-        if($user->photo){
-            $userPhotoPath = $user->photo->path;
+        $author = 'Visitor';
+        $email = '';
+
+        if(Auth::check()){
+
+            $user = Auth::user();
+
+            if($user->photo){
+                $userPhotoPath = $user->photo->path;
+            }
+
+            $author = $user->name;
+            $email = $user->email;
         }
 
         $data = [
             'comment_id' => $request->comment_id,
             'is_active' => $request->is_active,
-            'author' => $user->name,
-            'email' => $user->email,
+            'author' => $author,
+            'email' => $email,
             'photo' => $userPhotoPath,
             'body' => $request->body
         ];
 
-        CommentReply::create($data);
+        $reply = CommentReply::create($data);
 
-        return redirect()->back();
+        return $reply;
     }
 
     /**
