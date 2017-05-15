@@ -1,27 +1,16 @@
-# Laravel PHP Framework
+# laravel-my-cms
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+A Blog CMS made with Laravel<br>
+You can check it live here: http://www.mesquitafelipe.com/cms/<br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+### Getting Started
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
-
-## Official Documentation
-
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+1 - Clone the project on your desired folder: $ git clone git@github.com:mesqfel/laravel-my-cms.git<br><br>
+2 - Navigate to folder /laravel-my-cms<br><br>
+3 - Install dependencies by running: $ composer install<br><br>
+4 - Rename file ".env.example" to ".env" and place your own configuration values<br><br>
+5 - Generate database tables by running: $ php artisan migrate<br><br>
+6 - Navigate to folder /laravel-my-cms/public<br><br>
+7 - Start the localserver by running: $ php -S localhost:8000<br><br>
+8 - Visit: http://localhost:8000/<br><br>
+9 - If you have any trouble, email me: fe.mesquita88@gmail.com<br>
